@@ -6984,7 +6984,7 @@ void dbDatabase::unlinkTable(dbTableDescriptor* table)
 
 dbTableDescriptor* dbDatabase::findTableByName(char const* name)
 {
-    char* sym = (char*)name;
+    const char* sym = name;
     dbSymbolTable::add(sym, tkn_ident);
     return findTable(sym);
 }

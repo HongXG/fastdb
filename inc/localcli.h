@@ -93,7 +93,7 @@ struct statement_desc {
 class sql_scanner {
   private:
     char*  p;
-    char*  ident;
+    const char*  ident;
 
   public:
     int     get();
@@ -102,7 +102,7 @@ class sql_scanner {
         return p;
     }
 
-    char* identifier() { 
+    const char* identifier() {
         return ident;
     }
 

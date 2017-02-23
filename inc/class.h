@@ -296,7 +296,7 @@ class FASTDB_DLL_ENTRY dbFieldDescriptor {
     /**
      * Name of the field
      */
-    char*              name;
+    const char*        name;
 
     /**
      * Compound name of field, for example "coord.x"
@@ -306,7 +306,7 @@ class FASTDB_DLL_ENTRY dbFieldDescriptor {
     /**
      * Name of referenced table (for reference fields only)
      */
-    char*              refTableName;
+    const char*        refTableName;
 
     /**
      * Referenced table (for reference fields only)
@@ -326,7 +326,7 @@ class FASTDB_DLL_ENTRY dbFieldDescriptor {
     /**
      * Inverse reference name (for reference fields only)
      */
-    char*              inverseRefName;
+    const char*        inverseRefName;
 
     /**
      * Type of the field in the database (dbField::FieldTypes)
@@ -673,7 +673,7 @@ class FASTDB_DLL_ENTRY dbTableDescriptor {
     /**
      * Name of the table
      */
-    char*               name;
+    const char*         name;
 
     /**
      * Indetifier of table object in the database
@@ -874,7 +874,7 @@ class FASTDB_DLL_ENTRY dbTableDescriptor {
     /**
      * Get table name.
      */
-    char* getName() {
+    const char* getName() {
         return name;
     }
 

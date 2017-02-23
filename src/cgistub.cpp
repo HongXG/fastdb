@@ -37,7 +37,7 @@ int main()
 
     if (request == NULL || *request == '\0') { 
         char* length_str = getenv("CONTENT_LENGTH");
-        if (length_str == NULL || sscanf(length_str, "%d", &length) != 1) { 
+        if (length_str == NULL || sscanf(length_str, "%ld", &length) != 1) {
             message("Failed to receive data using POST method");
         }
         buf_size = length + 14 + 6 + strlen(host) + strlen(script) + strlen(peer);

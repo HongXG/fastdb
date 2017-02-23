@@ -57,7 +57,7 @@ class dbQueryScanner {
     db_int8     ival;
     real8    fval;
     char     buf[dbQueryMaxIdLength];
-    char*    ident;
+    const char* ident;
 
     int  get();
 

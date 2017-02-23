@@ -1304,11 +1304,11 @@ class FASTDB_DLL_ENTRY dbDatabase
     dbTableDescriptor* tableHash[dbTableHashSize];
 
     void exportScheme(FILE* out);
-    void exportClass(FILE* out, char* name, dbFieldDescriptor* fieldList);
+    void exportClass(FILE* out, const char* name, dbFieldDescriptor* fieldList);
 
     oid_t mapId(long id);
-    bool importField(char* terminator, dbFieldDescriptor* fd, byte* rec, dbXmlScanner& scanner);
-    bool importRecord(char* terminator, dbFieldDescriptor* fieldList, byte* rec, dbXmlScanner& scanner);
+    bool importField(const char* terminator, dbFieldDescriptor* fd, byte* rec, dbXmlScanner& scanner);
+    bool importRecord(const char* terminator, dbFieldDescriptor* fieldList, byte* rec, dbXmlScanner& scanner);
     void insertRecord(dbTableDescriptor* desc, oid_t oid, void const* record);
 
    /**

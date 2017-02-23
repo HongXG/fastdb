@@ -22,7 +22,7 @@ BEGIN_FASTDB_NAMESPACE
 class  FASTDB_DLL_ENTRY dbSymbolTable { 
     struct HashTableItem { 
         HashTableItem* next;
-        char*          str;
+        const char*    str;
         unsigned       hash;
         int            tag;
         byte           allocated;
@@ -39,7 +39,7 @@ class  FASTDB_DLL_ENTRY dbSymbolTable {
     ~dbSymbolTable();
     static dbSymbolTable instance;
 
-    static int add(char* &str, int tag,  bool allocate = true);
+    static int add(const char* &str, int tag,  bool allocate = true);
 };
 
 END_FASTDB_NAMESPACE

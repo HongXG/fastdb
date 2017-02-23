@@ -344,7 +344,7 @@ class FASTDB_DLL_ENTRY dbCompiler {
     dbWStrLiteral      wsvalue;
     bool               hasToken;
     int                lex;
-    char*              name;
+    const char*        name;
     dbBinding*         bindings;
     int                nFreeVars;
     int                varType;

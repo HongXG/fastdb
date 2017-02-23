@@ -771,7 +771,7 @@ class FASTDB_DLL_ENTRY dbUserFunction {
     friend class dbCompiler;
 
     void* fptr;
-    char* fname;
+    const char* fname;
     
     dbUserFunction* next;
     static dbUserFunction* list;
@@ -815,7 +815,7 @@ class FASTDB_DLL_ENTRY dbUserFunction {
     };
     int type;
 
-    void bind(char* name, void* f, funcType ftype);
+    void bind(const char* name, void* f, funcType ftype);
 
   public:
 

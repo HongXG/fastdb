@@ -14,7 +14,7 @@ static void CLI_CALLBACK_CC stderrTrace(char* msg)
 dbTraceFunctionPtr dbTraceFunction = stderrTrace;
 bool dbTraceEnable = true;
 
-FASTDB_DLL_ENTRY void dbTrace(char* message, ...) 
+FASTDB_DLL_ENTRY void dbTrace(const char* message, ...)
 {
     if (dbTraceEnable) { 
         va_list args;

@@ -34,7 +34,7 @@ dbSymbolTable::~dbSymbolTable() {
 #define strcmp(x,y) stricmp(x,y)
 #endif
 
-int dbSymbolTable::add(char* &str, int tag, bool allocate) {
+int dbSymbolTable::add(const char* &str, int tag, bool allocate) {
     static dbMutex mutex;
     dbCriticalSection cs(mutex);
     unsigned hash = 0;

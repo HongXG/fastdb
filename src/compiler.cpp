@@ -1882,7 +1882,7 @@ bool dbCompiler::compile(dbTableDescriptor* table, dbQuery& query)
 
 dbCompiler::dbCompiler() {
     static struct {
-        char* name;
+        const char* name;
         int   tag;
     } keywords[] = {
         {"all",     tkn_all},

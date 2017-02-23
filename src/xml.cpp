@@ -233,7 +233,7 @@ class dbXmlScanner {
         return true;
     }
 
-    bool expect(int sourcePos, char* expected) { 
+    bool expect(int sourcePos, const char* expected) {
         token tkn = scan();
         if (tkn != xml_ident) { 
             fprintf(stderr, "xml.cpp:%d: line %d, column %d: Get token %d instead of expected identifier\n", 
@@ -339,7 +339,7 @@ static void exportRecord(dbFieldDescriptor* fieldList, FILE* out, byte* src, int
         for (i = indent; --i >= 0;) { 
             fprintf(out, " ");
         }
-        char* fieldName = fd->name;
+        const char* fieldName = fd->name;
         if (strcmp(fieldName, "[]") == 0) { 
             fieldName = "array-element";
         }
@@ -443,7 +443,7 @@ void dbDatabase::exportScheme(FILE* out)
     fprintf(out, "<!ELEMENT array-element ANY>\n<!ELEMENT ref EMPTY>\n<!ATTLIST ref id CDATA #REQUIRED>\n]>\n");
 }
 
-void dbDatabase::exportClass(FILE* out, char* name, dbFieldDescriptor* fieldList) 
+void dbDatabase::exportClass(FILE* out, const char* name, dbFieldDescriptor* fieldList)
 {
     fprintf(out, "<!ELEMENT %s (%s", name, fieldList->name);
     dbFieldDescriptor* fd = fieldList;
@@ -730,7 +730,7 @@ static bool skipElement(dbXmlScanner& scanner)
     return true;
 }
 
-bool dbDatabase::importRecord(char* terminator, dbFieldDescriptor* fieldList, byte* rec, dbXmlScanner& scanner) 
+bool dbDatabase::importRecord(const char* terminator, dbFieldDescriptor* fieldList, byte* rec, dbXmlScanner& scanner)
 {
     dbXmlScanner::token tkn;
 
@@ -740,7 +740,7 @@ bool dbDatabase::importRecord(char* terminator, dbFieldDescriptor* fieldList, by
         { 
             return false;
         }
-        char* fieldName = scanner.getIdentifier();
+        const char* fieldName = scanner.getIdentifier();
         dbSymbolTable::add(fieldName, tkn_ident, FASTDB_CLONE_ANY_IDENTIFIER);
         dbFieldDescriptor* fd = fieldList;
         while (true) {
@@ -763,7 +763,7 @@ bool dbDatabase::importRecord(char* terminator, dbFieldDescriptor* fieldList, by
 
 #define HEX_DIGIT(ch) ((ch) >= 'a' ? ((ch) - 'a' + 10) : (ch) >= 'A' ? (((ch) - 'A' + 10)) : ((ch) - '0'))
 
-bool dbDatabase::importField(char* terminator, dbFieldDescriptor* fd, byte* rec, dbXmlScanner& scanner) 
+bool dbDatabase::importField(const char* terminator, dbFieldDescriptor* fd, byte* rec, dbXmlScanner& scanner)
 {
     dbXmlScanner::token tkn;
     int i;

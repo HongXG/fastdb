@@ -425,7 +425,7 @@ int dbUserFunction::getNumberOfParameters()
 dbUserFunction* dbUserFunction::list;
 
 
-void dbUserFunction::bind(char* name, void* f, funcType ftype) 
+void dbUserFunction::bind(const char* name, void* f, funcType ftype)
 { 
     fname = name;
     dbSymbolTable::add(fname, tkn_ident, FASTDB_CLONE_ANY_IDENTIFIER);

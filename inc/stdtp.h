@@ -171,7 +171,7 @@ typedef void (CLI_CALLBACK_CC *dbTraceFunctionPtr)(char* message);
 // Pointer to trace function (default implementation just prints message to stderr)
 extern FASTDB_DLL_ENTRY dbTraceFunctionPtr dbTraceFunction;
 
-extern FASTDB_DLL_ENTRY void dbTrace(char* message, ...);
+extern FASTDB_DLL_ENTRY void dbTrace(const char* message, ...);
 
 #ifdef _WIN32 
 #define mbstowcs(_dst, _src, _size) (MultiByteToWideChar(CP_UTF8, 0, (_src), -1, (_dst), (int)(_size))-1)

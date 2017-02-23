@@ -267,7 +267,7 @@ dbFieldDescriptor::~dbFieldDescriptor()
 
 dbFieldDescriptor* dbFieldDescriptor::find(char const* name)
 {
-    char* symnam = (char*)name;
+    const char* symnam = name;
     dbSymbolTable::add(symnam, tkn_ident);
     return findSymbol(symnam);
 }
@@ -1083,7 +1083,7 @@ dbTableDescriptor::dbTableDescriptor(char const*        tableName,
     } else {
         isStatic = false;
     }
-    name = (char*)tableName;
+    name = tableName;
     dbSymbolTable::add(name, tkn_ident, FASTDB_CLONE_ANY_IDENTIFIER);
     describeComponentsFunc = func;
     columns = (*func)();
@@ -1482,7 +1482,7 @@ bool dbTableDescriptor::checkRelationship()
 
 dbFieldDescriptor* dbTableDescriptor::find(char const* name)
 {
-    char* symnam = (char*)name;
+    const char* symnam = name;
     dbSymbolTable::add(symnam, tkn_ident);
     return findSymbol(symnam);
 }
@@ -1661,8 +1661,8 @@ dbFieldDescriptor* dbTableDescriptor::buildFieldsList(dbTable*    table,
     while (nFields < table->fields.size
            && strncmp((char*)field + field->name.offs, prefix, prefixLen) == 0)
     {
-        char* longName = (char*)field + field->name.offs;
-        char* name = longName + prefixLen;
+        const char* longName = (char*)field + field->name.offs;
+        const char* name = longName + prefixLen;
         if (*name == '.') { 
             name += 1;
         } else if (prefixLen != 0 && *name != '[') { 

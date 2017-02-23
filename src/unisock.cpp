@@ -231,7 +231,7 @@ bool  unix_socket::is_ok()
 
 void unix_socket::get_error_text(char* buf, size_t buf_size)
 {
-    char* msg; 
+    const char* msg;
     switch(errcode) { 
       case ok:
         msg = "ok";
@@ -647,6 +647,7 @@ unix_socket::~unix_socket()
 
 unix_socket::unix_socket(const char* addr, socket_domain domain)
 { 
+    fd = -1;
     address = new char[strlen(addr)+1]; 
     strcpy(address, addr);
     this->domain = domain;
@@ -658,6 +659,7 @@ unix_socket::unix_socket(int new_fd)
 { 
     fd = new_fd; 
     address = NULL; 
+    this->domain = sock_any_domain;
     create_file = false;
     state = ss_open; 
     errcode = ok;

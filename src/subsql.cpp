@@ -29,7 +29,7 @@
 
 BEGIN_FASTDB_NAMESPACE
 
-static char* typeMnem[] = {
+static const char* typeMnem[] = {
         "Boolean",
         "Int1",
         "Int2",
@@ -59,14 +59,14 @@ static char* typeMnem[] = {
         "Unknown" 
 };
 
-char* dbSubSql::prompt = ">> ";
+const char* dbSubSql::prompt = ">> ";
 
 
 dbSubSql::dbSubSql(dbAccessType accessType)
 : dbDatabase(accessType)
 {
     static struct { 
-        char* name;
+        const char* name;
         int   tag;
     } keywords[] = { 
         {"alter",   tkn_alter},
@@ -367,7 +367,7 @@ int dbSubSql::scan()
 }
 
 
-bool dbSubSql::expect(char* expected, int token)
+bool dbSubSql::expect(const char* expected, int token)
 {
     int tkn = scan();
     if (tkn != token) { 
@@ -389,7 +389,7 @@ bool dbSubSql::updateTable(bool create)
     if (!expect("table name", tkn_ident) || !expect("(", tkn_lpar)) { 
         return false;
     }
-    char* name = this->name;
+    const char* name = this->name;
     int varyingLength = (int)strlen(name)+1;
 
     static const struct { 
@@ -2985,7 +2985,7 @@ void dbSubSql::queryPage(WWWconnection& con)
         httpError(con, "No such table");
         return;
     }
-    char* history = con.get("history");
+    const char* history = con.get("history");
     if (history == NULL) { 
         history = "";
     }

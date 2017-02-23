@@ -1286,7 +1286,7 @@ char* dbServer::checkColumns(dbStatement* stmt, int n_columns,
     response = cli_ok;
     while (--n_columns >= 0) {
         int cliType = *data++;
-        char* columnName = data;
+        const char* columnName = data;
         dbSymbolTable::add(columnName, tkn_ident, true);    
         dbFieldDescriptor* fd = desc->findSymbol(columnName);
         data += strlen(data) + 1;

@@ -237,13 +237,13 @@ void WWWconnection::addPair(char const* name, char const* value)
 
 #define HEX_DIGIT(ch) ((ch) >= 'a' ? ((ch) - 'a' + 10) : (ch) >= 'A' ? ((ch) - 'A' + 10) : ((ch) - '0'))
 
-char* WWWconnection::unpack(char* body, size_t length)
+char* WWWconnection::unpack(const char* body, size_t length)
 {
-    char *src = body, *end = body + length;
+	const char *src = body, *end = body + length;
     while (src < end) { 
-        char* name = src;
+    	const char* name = src;
         char ch; 
-        char* dst = src;
+        char* dst = (char*)src;
         while (src < end && (ch = *src++) != '=') { 
             if (ch == '+') {
                 ch = ' ';
@@ -254,7 +254,7 @@ char* WWWconnection::unpack(char* body, size_t length)
             *dst++ = ch;
         }
         *dst = '\0';
-        char* value = dst = src;
+        char* value = dst = (char*)src;
         while (src < end && (ch = *src++) != '&') { 
             if (ch == '+') {
                 ch = ' ';
@@ -447,7 +447,7 @@ bool CGIapi::serve(WWWconnection& con)
     return result;
 }
 
-inline char* stristr(char* s, char* p) { 
+inline const char* stristr(const char* s, const char* p) {
     while (*s != '\0') { 
         int i;
         for (i = 0; (s[i] & ~('a'-'A')) == (p[i] & ~('a' - 'A')) && p[i] != '\0'; i++);
@@ -499,14 +499,14 @@ bool HTTPapi::serve(WWWconnection& con)
         }    
         p += 2;
         int length = INT_MAX;
-        char* lenptr = stristr(buf, "content-length: ");
+        const char* lenptr = stristr(buf, "content-length: ");
         bool  persistentConnection = 
             stristr(buf, "Connection: keep-alive") != NULL;
-        char* host = stristr(buf, "host: ");
+        const char* host = stristr(buf, "host: ");
         if (host != NULL) { 
-            char* q = host += 6;
+            const char* q = host += 6;
             while (*q != '\n' && *q != '\r' && *q != '\0') q += 1;
-            *q = '\0';
+            *(char*)q = '\0';
         }
         if (lenptr != NULL) { 
             sscanf(lenptr+15, "%d", &length);
@@ -660,8 +660,8 @@ bool HTTPapi::serve(WWWconnection& con)
 }
 
 
-bool HTTPapi::handleRequest(WWWconnection& con, char* begin, char* end,
-                            char* host, bool& result)
+bool HTTPapi::handleRequest(WWWconnection& con, const char* begin, char* end,
+                            const char* host, bool& result)
 {
     char buf[64];
     char ch = *end;

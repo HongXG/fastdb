@@ -159,7 +159,7 @@ class FASTDB_DLL_ENTRY WWWconnection {
     //
     // Unpack requests paramters
     //
-    char* unpack(char* body, size_t body_length);
+    char* unpack(const char* body, size_t body_length);
 };
 
 
@@ -237,8 +237,8 @@ class FASTDB_DLL_ENTRY HTTPapi : public WWWapi {
     time_t connectionHoldTimeout;
     bool   keepConnectionAlive;
 
-    bool handleRequest(WWWconnection& con, char* begin, char* end, 
-                       char* host, bool& result);
+    bool handleRequest(WWWconnection& con, const char* begin, char* end,
+                       const char* host, bool& result);
 
   public:
     virtual bool serve(WWWconnection& con);

@@ -152,9 +152,9 @@ class dbSubSql : public dbDatabase {
     bool  opened;
     db_int8  ival;
     real8 fval;
-    char* name;
+    const char* name;
 
-    static char* prompt;
+    static const char* prompt;
 
     dbTableDescriptor* droppedTables;
     dbTableDescriptor* existedTables;
@@ -194,7 +194,7 @@ class dbSubSql : public dbDatabase {
     int  scan();
     bool parse();
 
-    bool expect(char* expected, int token);
+    bool expect(const char* expected, int token);
     
     void recovery();
 
